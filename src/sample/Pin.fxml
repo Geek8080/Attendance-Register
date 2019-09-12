@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane prefHeight="222.0" prefWidth="531.0" stylesheets="@theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PinController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="531.0">
+         <children>
+            <JFXPasswordField fx:id="pin" labelFloat="true" layoutX="87.0" layoutY="67.0" promptText="PIN" styleClass="pin-text-field" />
+            <JFXButton fx:id="ok" focusTraversable="false" layoutX="217.0" layoutY="155.0" onMouseClicked="#check" prefHeight="39.0" prefWidth="97.0" text="OK" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

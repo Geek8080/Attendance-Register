@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_attendance_register" default="compile.module.attendance_register">
+  <dirname property="module.attendance_register.basedir" file="${ant.file.module_attendance_register}"/>
+  
+  <property name="module.jdk.home.attendance_register" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.attendance_register" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.attendance_register" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.attendance_register" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="attendance_register.output.dir" value="${module.attendance_register.basedir}/out/production/Attendance Register"/>
+  <property name="attendance_register.testoutput.dir" value="${module.attendance_register.basedir}/out/test/Attendance Register"/>
+  
+  <path id="attendance_register.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="attendance_register.module.production.classpath">
+    <path refid="${module.jdk.classpath.attendance_register}"/>
+  </path>
+  
+  <path id="attendance_register.runtime.production.module.classpath">
+    <pathelement location="${attendance_register.output.dir}"/>
+  </path>
+  
+  <path id="attendance_register.module.classpath">
+    <path refid="${module.jdk.classpath.attendance_register}"/>
+    <pathelement location="${attendance_register.output.dir}"/>
+  </path>
+  
+  <path id="attendance_register.runtime.module.classpath">
+    <pathelement location="${attendance_register.testoutput.dir}"/>
+    <pathelement location="${attendance_register.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.attendance_register">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.attendance_register">
+    <patternset refid="excluded.from.module.attendance_register"/>
+  </patternset>
+  
+  <path id="attendance_register.module.sourcepath">
+    <dirset dir="${module.attendance_register.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.attendance_register" depends="compile.module.attendance_register.production,compile.module.attendance_register.tests" description="Compile module Attendance Register"/>
+  
+  <target name="compile.module.attendance_register.production" depends="register.custom.compilers" description="Compile module Attendance Register; production classes">
+    <mkdir dir="${attendance_register.output.dir}"/>
+    <javac2 destdir="${attendance_register.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.attendance_register}/javac">
+      <compilerarg line="${compiler.args.attendance_register}"/>
+      <bootclasspath refid="attendance_register.module.bootclasspath"/>
+      <classpath refid="attendance_register.module.production.classpath"/>
+      <src refid="attendance_register.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.attendance_register"/>
+    </javac2>
+    
+    <copy todir="${attendance_register.output.dir}">
+      <fileset dir="${module.attendance_register.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.attendance_register.tests" depends="register.custom.compilers,compile.module.attendance_register.production" description="compile module Attendance Register; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.attendance_register" description="cleanup module">
+    <delete dir="${attendance_register.output.dir}"/>
+    <delete dir="${attendance_register.testoutput.dir}"/>
+  </target>
+</project>
